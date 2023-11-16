@@ -24,6 +24,7 @@ foreach ($pdo->query('SELECT * FROM reservation_vw', PDO::FETCH_ASSOC) as $reser
     echo '</tr>';
 }
 echo '</table>';
+
 }
 catch (PDOexception $e){
     echo 'Erreur de connexion à la base de données : ' . $e->getMessage();
