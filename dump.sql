@@ -50,7 +50,10 @@ DROP TABLE IF EXISTS `cinema`;
 CREATE TABLE `cinema` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cinema_name` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `cinema_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,7 +63,7 @@ CREATE TABLE `cinema` (
 
 LOCK TABLES `cinema` WRITE;
 /*!40000 ALTER TABLE `cinema` DISABLE KEYS */;
-INSERT INTO `cinema` VALUES (1,'CGKR'),(2,'PATENCROUTE'),(3,'GARDEMONT');
+INSERT INTO `cinema` VALUES (1,'CGKR',3),(2,'PATENCROUTE',1),(3,'GARDEMONT',2);
 /*!40000 ALTER TABLE `cinema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,7 +294,10 @@ CREATE TABLE `users` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `poste` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_admin` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_admin` (`id_admin`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -301,7 +307,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jessica','cinegirl','responsable'),(2,'alan','delaplace','responsable'),(3,'jeremy','duticket','responsable');
+INSERT INTO `users` VALUES (1,'jessica','cinegirl','responsable',1),(2,'alan','delaplace','responsable',1),(3,'jeremy','duticket','responsable',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,4 +338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-02 17:29:43
+-- Dump completed on 2023-11-17 12:29:33
